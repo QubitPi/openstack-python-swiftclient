@@ -37,10 +37,7 @@ jobs:
         with:
           python-version: "3.7"
       - name: Install dependencies
-        run: |
-          sudo apt-get install liberasurecode-dev
-          pip install swift
-          pip install -r requirements.txt -r doc/requirements.txt
+        run: pip install -r requirements.txt -r doc/requirements.txt
       - name: Build documentation
         run: sphinx-build -b html doc/source doc/build/html
       - name: Deploy documentation to GitHub Pages
