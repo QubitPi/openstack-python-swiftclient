@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CLI &#8212; python-swiftclient 0.1.0.dev1151 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fe63c2af" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=5c69cfe2" />
+    <script src="../_static/documentation_options.js?v=2f6af510"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The swiftclient.SwiftService API" href="../service-api.html" />
+    <link rel="prev" title="So You Want to Contribute…" href="../contributor/contributing.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link href="../_static/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="../_static/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="../_static/css/combined.css" rel="stylesheet">
+
+<!-- Search CSS -->
+<link href="../_static/css/search.css" rel="stylesheet">
+
+<!-- Pygments CSS -->
+<link href="../_static/pygments.css" rel="stylesheet">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-17511903-1', 'auto');
+ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+
+  </head><body>
+
+<!-- SOURCE_FILE: https://opendev.org/openstack/python-swiftclient/src/doc/source/cli/index.rst -->
+
+<script>
+    (function (window, document) {
+        var loader = function () {
+            var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+            script.src = "https://search.openstack.org/widget/embed.min.js?t="+Date.now();
+            tag.parentNode.insertBefore(script, tag);
+        };
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+    })(window, document);
+</script>
+
+<nav class="navbar navbar-default navbar-expand-md" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="brand-wrapper">
+        <a class="navbar-brand" href="https://www.openstack.org/">
+        <img src="../_static/images/logo-full.svg" width="135px" height="35px"/>
+        </a>
+      </div>
+      <button class="navbar-toggler" data-bs-target="#navbar-main-1" aria-controls="navbar-main-1" data-bs-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <div class="search-icon show"><i class="fa fa-search"></i> Search</div>
+      <div class="collapse navbar-collapse" id="navbar-main-1">
+<div class="search-container tiny">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</div>
+      <ul class="nav navbar-nav navbar-main ms-auto mb-2 mb-lg-0 justify-content-end show" role="navigation">
+<li class="search-container-mobile">
+    <div class="openstack-search-bar" data-baseUrl="search.openstack.org" data-context="docs-openstack"></div>
+</li>
+        <li class="nav-item dropdown"> <!--Software -->
+          <a href="https://www.openstack.org/software/" class="nav-link dropdown-toggle" aria-expanded="false">Software</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://www.openstack.org/software/">Overview</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/software/project-navigator/openstack-components">OpenStack Components</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/software/project-navigator/sdks">SDKs</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/software/project-navigator/deployment-tools">Deployment Tools</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/assets/software/projectmap/openstack-map.pdf" target="_blank">OpenStack Map</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/software/sample-configs/">Sample Configs</a></li>
+          </ul>
+        </li>
+        <li class="nav-item drop-down"> <!-- Use Cases -->
+          <a href="https://www.openstack.org/use-cases/" class="nav-link dropdown-toggle" role="button">Use Cases</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://www.openstack.org/use-cases/">Users in Production</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/use-cases/bare-metal/">Ironic Bare Metal</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/use-cases/edge-computing/">Edge Computing</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/use-cases/telecoms-and-nfv/">Telecom &amp; NFV</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/use-cases/science/">Science and HPC</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/use-cases/containers/">Containers</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/use-cases/enterprise/">Enterprise</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/surveys/landing">User Survey</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown"> <!-- Events -->
+          <a href="https://openinfra.dev/summit" class="nav-link dropdown-toggle" role="button" id="dropdownMenuEvents">Events</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://openinfra.dev/summit">OpenInfra Summit</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/ptg/">Project Teams Gathering</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/events/opendev-2020/">OpenDev</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/events/community-events/">Community Events</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/events/openstackdays">OpenStack &amp; OpenInfra Days</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/videos/">Summit Videos</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown"><!-- Community -->
+          <a href="https://www.openstack.org/community/" class="nav-link dropdown-toggle" role="button">Community</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://www.openstack.org/community/">Welcome! Start Here</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/community/tech-committee">OpenStack Technical Committee</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/community/speakers/">Speakers Bureau</a></li>
+            <li><a class="dropdown-item" href="http://wiki.openstack.org">OpenStack Wiki</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/coa/">Get Certified (COA)</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/community/jobs/">Jobs</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/marketing/">Marketing Resources</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/news/">Community News</a></li>
+            <li><a class="dropdown-item" href="http://superuser.openstack.org">Superuser Magazine</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/community/supporting-organizations/">OpenInfra Foundation Supporting Organizations</a></li>
+            <li><a class="dropdown-item" href="https://openinfra.dev">OpenInfra Foundation</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown"><!-- Marketplace -->
+          <a href="https://www.openstack.org/marketplace/" class="nav-link dropdown-toggle" role="button">Marketplace</a>
+          <ul class="dropdown-menu dropdown-hover">
+            <li><a class="dropdown-item" href="https://www.openstack.org/marketplace/training/">Training</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/marketplace/distros/">Distros &amp; Appliances</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/marketplace/public-clouds/">Public Clouds</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/marketplace/hosted-private-clouds/">Hosted Private Clouds</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/marketplace/remotely-managed-private-clouds/">Remotely Managed Private Clouds</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/marketplace/consulting/">Consulting &amp; Integrators</a></li>
+            <li><a class="dropdown-item" href="https://www.openstack.org/marketplace/drivers/">Drivers</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><!-- Blog -->
+          <a class="nav-link" href="https://www.openstack.org/blog/">Blog</a>
+        </li>
+        <li class="nav-item"><!-- Docs -->
+          <a class="nav-link" href="http://docs.openstack.org/">Docs</a>
+        </li>
+        <li class="nav-item dropdown join-nav-section"> <!-- Join -->
+          <a href="https://openinfra.dev/join/" class="nav-link dropdown-toggle" role="button">Join</a>
+          <ul class="dropdown-menu" style="display: none;">
+            <li><a class="dropdown-item" href="https://openinfra.dev/join/">Sign up for Foundation Membership</a></li>
+            <li><a class="dropdown-item" href="https://openinfra.dev/join/">Sponsor the Foundation</a></li>
+            <li><a class="dropdown-item" href="https://openinfra.dev">More about the Foundation</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"> <!-- Login -->
+          <a href="https://www.openstack.org/Security/login/?BackURL=/home/" class="sign-in-btn">Log In</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.container -->
+</nav>
+
+    <div class="container docs-book-wrapper">
+      <div class="row">
+        <div class="col-lg-9 col-md-8 col-sm-8 col-lg-push-3 col-md-push-4 col-sm-push-4 order-4">
+<div class="row docs-title">
+  <div class="col-lg-8">
+      <h1>CLI</h1>
+    
+  </div>
+  <div class="docs-actions">
+      <div class="version-dropdown">
+        <span>version</span>
+        <div class="version-dropdown-content">
+            <p><a href="../../latest" rel="nofollow">latest</a></p>
+        </div>
+      </div>
+    
+    <a href="../contributor/contributing.html"><i class="fa fa-angle-double-left" data-toggle="tooltip" data-placement="top" title="Previous: So You Want to Contribute…"></i></a>
+    
+    
+    <a href="../service-api.html"><i class="fa fa-angle-double-right" data-toggle="tooltip" data-placement="top" title="Next: The swiftclient.SwiftService API"></i></a>
+    
+    <a id="pdfLink1" href="" target="_blank" title="Download the manuals as PDF"><i class="fa fa-file-pdf-o" data-toggle="tooltip" data-placement="top" title="Download PDF"></i></a>
+    
+    <a id="logABugLink1" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+    
+  </div>
+</div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="docs-body" role="main">
+
+  <section id="cli">
+<h1>CLI<a class="headerlink" href="#cli" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">swift</span></code> tool is a command line utility for communicating with an OpenStack
+Object Storage (swift) environment. It allows one to perform several types of
+operations.</p>
+<p>For help on a specific <strong class="command">swift</strong> command, enter:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>swift<span class="w"> </span>COMMAND<span class="w"> </span>--help
+</pre></div>
+</div>
+<section id="swift-usage">
+<span id="swift-command-usage"></span><h2>swift usage<a class="headerlink" href="#swift-usage" title="Link to this heading">¶</a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift [--version] [--help] [--os-help] [--snet] [--verbose]</span>
+<span class="go">             [--debug] [--info] [--quiet] [--auth &lt;auth_url&gt;]</span>
+<span class="go">             [--auth-version &lt;auth_version&gt; |</span>
+<span class="go">                 --os-identity-api-version &lt;auth_version&gt; ]</span>
+<span class="go">             [--user &lt;username&gt;]</span>
+<span class="go">             [--key &lt;api_key&gt;] [--retries &lt;num_retries&gt;]</span>
+<span class="go">             [--os-username &lt;auth-user-name&gt;] [--os-password &lt;auth-password&gt;]</span>
+<span class="go">             [--os-user-id &lt;auth-user-id&gt;]</span>
+<span class="go">             [--os-user-domain-id &lt;auth-user-domain-id&gt;]</span>
+<span class="go">             [--os-user-domain-name &lt;auth-user-domain-name&gt;]</span>
+<span class="go">             [--os-tenant-id &lt;auth-tenant-id&gt;]</span>
+<span class="go">             [--os-tenant-name &lt;auth-tenant-name&gt;]</span>
+<span class="go">             [--os-project-id &lt;auth-project-id&gt;]</span>
+<span class="go">             [--os-project-name &lt;auth-project-name&gt;]</span>
+<span class="go">             [--os-project-domain-id &lt;auth-project-domain-id&gt;]</span>
+<span class="go">             [--os-project-domain-name &lt;auth-project-domain-name&gt;]</span>
+<span class="go">             [--os-auth-url &lt;auth-url&gt;] [--os-auth-token &lt;auth-token&gt;]</span>
+<span class="go">             [--os-storage-url &lt;storage-url&gt;] [--os-region-name &lt;region-name&gt;]</span>
+<span class="go">             [--os-service-type &lt;service-type&gt;]</span>
+<span class="go">             [--os-endpoint-type &lt;endpoint-type&gt;]</span>
+<span class="go">             [--os-cacert &lt;ca-certificate&gt;] [--insecure]</span>
+<span class="go">             [--os-cert &lt;client-certificate-file&gt;]</span>
+<span class="go">             [--os-key &lt;client-certificate-key-file&gt;]</span>
+<span class="go">             [--no-ssl-compression]</span>
+<span class="go">             &lt;subcommand&gt; [--help] [&lt;subcommand options&gt;]</span>
+</pre></div>
+</div>
+<p><strong>Subcommands:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">delete</span></code></dt><dd><p>Delete a container or objects within a container.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">download</span></code></dt><dd><p>Download objects from containers.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">list</span></code></dt><dd><p>Lists the containers for the account or the objects
+for a container.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">post</span></code></dt><dd><p>Updates meta information for the account, container,
+or object; creates containers if not present.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">copy</span></code></dt><dd><p>Copies object, optionally adds meta</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">stat</span></code></dt><dd><p>Displays information for the account, container,
+or object.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">upload</span></code></dt><dd><p>Uploads files or directories to the given container.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">capabilities</span></code></dt><dd><p>List cluster capabilities.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tempurl</span></code></dt><dd><p>Create a temporary URL.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">auth</span></code></dt><dd><p>Display auth related environment variables.</p>
+</dd>
+</dl>
+</section>
+<section id="swift-optional-arguments">
+<span id="swift-command-options"></span><h2>swift optional arguments<a class="headerlink" href="#swift-optional-arguments" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">--version</span></code></dt><dd><p>show program’s version number and exit</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-h,</span> <span class="pre">--help</span></code></dt><dd><p>show this help message and exit</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--os-help</span></code></dt><dd><p>Show OpenStack authentication options.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-s,</span> <span class="pre">--snet</span></code></dt><dd><p>Use SERVICENET internal network.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-v,</span> <span class="pre">--verbose</span></code></dt><dd><p>Print more info.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--debug</span></code></dt><dd><p>Show the curl commands and results of all http queries
+regardless of result status.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--info</span></code></dt><dd><p>Show the curl commands and results of all http queries
+which return an error.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-q,</span> <span class="pre">--quiet</span></code></dt><dd><p>Suppress status output.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-A</span> <span class="pre">AUTH,</span> <span class="pre">--auth=AUTH</span></code></dt><dd><p>URL for obtaining an auth token.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-V</span> <span class="pre">AUTH_VERSION,</span> <span class="pre">--auth-version=AUTH_VERSION,</span> <span class="pre">--os-identity-api-version=AUTH_VERSION</span></code></dt><dd><p>Specify a version for authentication. Defaults to
+<code class="docutils literal notranslate"><span class="pre">env[ST_AUTH_VERSION]</span></code>, <code class="docutils literal notranslate"><span class="pre">env[OS_AUTH_VERSION]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">env[OS_IDENTITY_API_VERSION]</span></code> or 1.0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-U</span> <span class="pre">USER,</span> <span class="pre">--user=USER</span></code></dt><dd><p>User name for obtaining an auth token.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-K</span> <span class="pre">KEY,</span> <span class="pre">--key=KEY</span></code></dt><dd><p>Key for obtaining an auth token.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-R</span> <span class="pre">RETRIES,</span> <span class="pre">--retries=RETRIES</span></code></dt><dd><p>The number of times to retry a failed connection.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--insecure</span></code></dt><dd><p>Allow swiftclient to access servers without having to
+verify the SSL certificate. Defaults to
+<code class="docutils literal notranslate"><span class="pre">env[SWIFTCLIENT_INSECURE]</span></code> (set to ‘true’ to enable).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--no-ssl-compression</span></code></dt><dd><p>This option is deprecated and not used anymore. SSL
+compression should be disabled by default by the
+system SSL library.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--prompt</span></code></dt><dd><p>Prompt user to enter a password which overrides any password supplied via
+<code class="docutils literal notranslate"><span class="pre">--key</span></code>, <code class="docutils literal notranslate"><span class="pre">--os-password</span></code> or environment variables.</p>
+</dd>
+</dl>
+</section>
+<section id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">¶</a></h2>
+<p>This section covers the options for authenticating with a swift
+object store. The combinations of options required for each authentication
+version are detailed below, but are just a subset of those that can be used
+to successfully authenticate. These are the most common and recommended
+combinations.</p>
+<p>You should obtain the details of your authentication version and credentials
+from your storage provider. These details should make it clearer which of the
+authentication sections below are most likely to allow you to connect to your
+storage account.</p>
+<section id="keystone-v3">
+<h3>Keystone v3<a class="headerlink" href="#keystone-v3" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>swift<span class="w"> </span>--os-auth-url<span class="w"> </span>https://api.example.com:5000/v3<span class="w"> </span>--auth-version<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-project-name<span class="w"> </span>project1<span class="w"> </span>--os-project-domain-name<span class="w"> </span>domain1<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-username<span class="w"> </span>user<span class="w"> </span>--os-user-domain-name<span class="w"> </span>domain1<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-password<span class="w"> </span>password<span class="w"> </span>list
+
+swift<span class="w"> </span>--os-auth-url<span class="w"> </span>https://api.example.com:5000/v3<span class="w"> </span>--auth-version<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-project-id<span class="w"> </span>0123456789abcdef0123456789abcdef<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-user-id<span class="w"> </span>abcdef0123456789abcdef0123456789<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-password<span class="w"> </span>password<span class="w"> </span>list
+</pre></div>
+</div>
+<p>Manually specifying the options above on the command line can be avoided by
+setting the following combinations of environment variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ST_AUTH_VERSION</span><span class="o">=</span><span class="m">3</span>
+<span class="nv">OS_USERNAME</span><span class="o">=</span>user
+<span class="nv">OS_USER_DOMAIN_NAME</span><span class="o">=</span>domain1
+<span class="nv">OS_PASSWORD</span><span class="o">=</span>password
+<span class="nv">OS_PROJECT_NAME</span><span class="o">=</span>project1
+<span class="nv">OS_PROJECT_DOMAIN_NAME</span><span class="o">=</span>domain1
+<span class="nv">OS_AUTH_URL</span><span class="o">=</span>https://api.example.com:5000/v3
+
+<span class="nv">ST_AUTH_VERSION</span><span class="o">=</span><span class="m">3</span>
+<span class="nv">OS_USER_ID</span><span class="o">=</span>abcdef0123456789abcdef0123456789
+<span class="nv">OS_PASSWORD</span><span class="o">=</span>password
+<span class="nv">OS_PROJECT_ID</span><span class="o">=</span>0123456789abcdef0123456789abcdef
+<span class="nv">OS_AUTH_URL</span><span class="o">=</span>https://api.example.com:5000/v3
+</pre></div>
+</div>
+</section>
+<section id="keystone-v2">
+<h3>Keystone v2<a class="headerlink" href="#keystone-v2" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>swift<span class="w"> </span>--os-auth-url<span class="w"> </span>https://api.example.com:5000/v2.0<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-tenant-name<span class="w"> </span>tenant<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-username<span class="w"> </span>user<span class="w"> </span>--os-password<span class="w"> </span>password<span class="w"> </span>list
+</pre></div>
+</div>
+<p>Manually specifying the options above on the command line can be avoided by
+setting the following environment variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ST_AUTH_VERSION</span><span class="o">=</span><span class="m">2</span>.0
+<span class="nv">OS_USERNAME</span><span class="o">=</span>user
+<span class="nv">OS_PASSWORD</span><span class="o">=</span>password
+<span class="nv">OS_TENANT_NAME</span><span class="o">=</span>tenant
+<span class="nv">OS_AUTH_URL</span><span class="o">=</span>https://api.example.com:5000/v2.0
+</pre></div>
+</div>
+</section>
+<section id="legacy-auth-systems">
+<h3>Legacy auth systems<a class="headerlink" href="#legacy-auth-systems" title="Link to this heading">¶</a></h3>
+<p>You can configure swift to work with any number of other authentication systems
+that we will not cover in this document. If your storage provider is not using
+Keystone to provide access tokens, please contact them for instructions on the
+required options. It is likely that the options will need to be specified as
+below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>swift<span class="w"> </span>-A<span class="w"> </span>https://api.example.com/v1.0<span class="w"> </span>-U<span class="w"> </span>user<span class="w"> </span>-K<span class="w"> </span>api_key<span class="w"> </span>list
+</pre></div>
+</div>
+<p>Specifying the options above manually on the command line can be avoided by
+setting the following environment variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ST_AUTH_VERSION</span><span class="o">=</span><span class="m">1</span>.0
+<span class="nv">ST_AUTH</span><span class="o">=</span>https://api.example.com/v1.0
+<span class="nv">ST_USER</span><span class="o">=</span>user
+<span class="nv">ST_KEY</span><span class="o">=</span>key
+</pre></div>
+</div>
+<p>It is also possible that you need to use a completely separate auth system, in which
+case <code class="docutils literal notranslate"><span class="pre">swiftclient</span></code> cannot request a token for you. In this case you should make the
+authentication request separately and access your storage using the token and
+storage URL options shown below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>swift<span class="w"> </span>--os-auth-token<span class="w"> </span>6ee5eb33efad4e45ab46806eac010566<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>--os-storage-url<span class="w"> </span>https://10.1.5.2:8080/v1/AUTH_ced809b6a4baea7aeab61a<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>list
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Leftover environment variables are a common source of confusion when
+authorization fails.</p>
+</div>
+</section>
+</section>
+<section id="cli-commands">
+<h2>CLI commands<a class="headerlink" href="#cli-commands" title="Link to this heading">¶</a></h2>
+<section id="auth">
+<span id="swift-auth"></span><h3>Auth<a class="headerlink" href="#auth" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift auth</span>
+</pre></div>
+</div>
+<p>Display authentication variables in shell friendly format. Command to run to export storage
+URL and auth token into <code class="docutils literal notranslate"><span class="pre">OS_STORAGE_URL</span></code> and <code class="docutils literal notranslate"><span class="pre">OS_AUTH_TOKEN</span></code>: <code class="docutils literal notranslate"><span class="pre">swift</span> <span class="pre">auth</span></code>.
+Command to append to a runcom file (e.g. <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>, <code class="docutils literal notranslate"><span class="pre">/etc/profile</span></code>) for automatic
+authentication: <code class="docutils literal notranslate"><span class="pre">swift</span> <span class="pre">auth</span> <span class="pre">-v</span> <span class="pre">-U</span> <span class="pre">test:tester</span> <span class="pre">-K</span> <span class="pre">testing</span></code>.</p>
+</section>
+<section id="swift-stat">
+<span id="id1"></span><h3>swift stat<a class="headerlink" href="#swift-stat" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift stat [--lh] [--header &lt;header:value&gt;]</span>
+<span class="go">                  [&lt;container&gt; [&lt;object&gt;]]</span>
+</pre></div>
+</div>
+<p>Displays information for the account, container, or object depending on
+the arguments given (if any). In verbose mode, the storage URL and the
+authentication token are displayed as well.</p>
+<p><strong>Positional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">[container]</span></code></dt><dd><p>Name of container to stat from.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[object]</span></code></dt><dd><p>Name of object to stat.</p>
+</dd>
+</dl>
+<p><strong>Optional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">--lh</span></code></dt><dd><p>Report sizes in human readable format similar to
+ls -lh.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-H,</span> <span class="pre">--header</span> <span class="pre">&lt;header:value&gt;</span></code></dt><dd><p>Adds a custom request header to use for stat.</p>
+</dd>
+</dl>
+</section>
+<section id="swift-list">
+<span id="id2"></span><h3>swift list<a class="headerlink" href="#swift-list" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift list [--long] [--lh] [--totals] [--prefix &lt;prefix&gt;]</span>
+<span class="go">                  [--delimiter &lt;delimiter&gt;] [--header &lt;header:value&gt;]</span>
+<span class="go">                  [&lt;container&gt;]</span>
+</pre></div>
+</div>
+<p>Lists the containers for the account or the objects for a container.
+The <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">&lt;prefix&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--prefix</span> <span class="pre">&lt;prefix&gt;</span></code> is an option that will only
+list items beginning with that prefix. The <code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">&lt;delimiter&gt;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">--delimiter</span> <span class="pre">&lt;delimiter&gt;</span></code> is an option (for container listings only)
+that will roll up items with the given delimiter (see <cite>OpenStack Swift
+general documentation &lt;https://docs.openstack.org/swift/latest/&gt;</cite> for
+what this means).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-l</span></code> and <code class="docutils literal notranslate"><span class="pre">--lh</span></code> options provide more detail, similar to <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code>
+and <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-lh</span></code>, the latter providing sizes in human readable format
+(For example: <code class="docutils literal notranslate"><span class="pre">3K</span></code>, <code class="docutils literal notranslate"><span class="pre">12M</span></code>, etc). The latter two switches use more
+overhead to retrieve the displayed details, which is directly proportional
+to the number of container or objects listed.</p>
+<p><strong>Positional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">[container]</span></code></dt><dd><p>Name of container to list object in.</p>
+</dd>
+</dl>
+<p><strong>Optional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">-l,</span> <span class="pre">--long</span></code></dt><dd><p>Long listing format, similar to ls -l.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--lh</span></code></dt><dd><p>Report sizes in human readable format similar to
+ls -lh.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-t,</span> <span class="pre">--totals</span></code></dt><dd><p>Used with -l or –lh, only report totals.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">&lt;prefix&gt;,</span> <span class="pre">--prefix</span> <span class="pre">&lt;prefix&gt;</span></code></dt><dd><p>Only list items beginning with the prefix.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">&lt;delim&gt;,</span> <span class="pre">--delimiter</span> <span class="pre">&lt;delim&gt;</span></code></dt><dd><p>Roll up items with the given delimiter. For containers
+only. See OpenStack Swift API documentation for what
+this means.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-H,</span> <span class="pre">--header</span> <span class="pre">&lt;header:value&gt;</span></code></dt><dd><p>Adds a custom request header to use for listing.</p>
+</dd>
+</dl>
+</section>
+<section id="swift-upload">
+<span id="id3"></span><h3>swift upload<a class="headerlink" href="#swift-upload" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift upload [--changed] [--skip-identical] [--segment-size &lt;size&gt;]</span>
+<span class="go">                    [--segment-container &lt;container&gt;] [--leave-segments]</span>
+<span class="go">                    [--object-threads &lt;thread&gt;] [--segment-threads &lt;threads&gt;]</span>
+<span class="go">                    [--header &lt;header&gt;] [--use-slo] [--ignore-checksum]</span>
+<span class="go">                    [--object-name &lt;object-name&gt;]</span>
+<span class="go">                    &lt;container&gt; &lt;file_or_directory&gt; [&lt;file_or_directory&gt;] [...]</span>
+</pre></div>
+</div>
+<p>Uploads the files and directories specified by the remaining arguments to the
+given container. The <code class="docutils literal notranslate"><span class="pre">-c</span></code> or <code class="docutils literal notranslate"><span class="pre">--changed</span></code> is an option that will only
+upload files that have changed since the last upload. The
+<code class="docutils literal notranslate"><span class="pre">--object-name</span> <span class="pre">&lt;object-name&gt;</span></code> is an option that will upload a file and
+name object to <code class="docutils literal notranslate"><span class="pre">&lt;object-name&gt;</span></code> or upload a directory and use <code class="docutils literal notranslate"><span class="pre">&lt;object-name&gt;</span></code>
+as object prefix. If the file name is “-”, client reads content from standard
+input. In this case <code class="docutils literal notranslate"><span class="pre">--object-name</span></code> is required to set the name of the object
+and no other files may be given.  The <code class="docutils literal notranslate"><span class="pre">-S</span> <span class="pre">&lt;size&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--segment-size</span> <span class="pre">&lt;size&gt;</span></code>
+and <code class="docutils literal notranslate"><span class="pre">--leave-segments</span></code> are options as well (see <code class="docutils literal notranslate"><span class="pre">--help</span></code> for more).</p>
+<p><strong>Positional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;container&gt;</span></code></dt><dd><p>Name of container to upload to.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;file_or_directory&gt;</span></code></dt><dd><p>Name of file or directory to upload. Specify multiple
+times for multiple uploads.</p>
+</dd>
+</dl>
+<p><strong>Optional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">-c,</span> <span class="pre">--changed</span></code></dt><dd><p>Only upload files that have changed since the last
+upload.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--skip-identical</span></code></dt><dd><p>Skip uploading files that are identical on both sides.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-S,</span> <span class="pre">--segment-size</span> <span class="pre">&lt;size&gt;</span></code></dt><dd><p>Upload files in segments no larger than &lt;size&gt; (in
+Bytes) and then create a “manifest” file that will
+download all the segments as if it were the original
+file.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--segment-container</span> <span class="pre">&lt;container&gt;</span></code></dt><dd><p>Upload the segments into the specified container. If
+not specified, the segments will be uploaded to a
+&lt;container&gt;_segments container to not pollute the
+main &lt;container&gt; listings.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--leave-segments</span></code></dt><dd><p>Indicates that you want the older segments of manifest
+objects left alone (in the case of overwrites).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--object-threads</span> <span class="pre">&lt;threads&gt;</span></code></dt><dd><p>Number of threads to use for uploading full objects.
+Default is 10.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--segment-threads</span> <span class="pre">&lt;threads&gt;</span></code></dt><dd><p>Number of threads to use for uploading object segments.
+Default is 10.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-H,</span> <span class="pre">--header</span> <span class="pre">&lt;header:value&gt;</span></code></dt><dd><p>Adds a customized request header. This option may be
+repeated. Example: -H “content-type:text/plain”
+-H “Content-Length: 4000”.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--use-slo</span></code></dt><dd><p>When used in conjunction with –segment-size it will
+create a Static Large Object instead of the default
+Dynamic Large Object.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--object-name</span> <span class="pre">&lt;object-name&gt;</span></code></dt><dd><p>Upload file and name object to &lt;object-name&gt; or upload
+dir and use &lt;object-name&gt; as object prefix instead of
+folder name.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--ignore-checksum</span></code></dt><dd><p>Turn off checksum validation for uploads.</p>
+</dd>
+</dl>
+</section>
+<section id="swift-post">
+<span id="id4"></span><h3>swift post<a class="headerlink" href="#swift-post" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift post [--read-acl &lt;acl&gt;] [--write-acl &lt;acl&gt;] [--sync-to &lt;sync-to&gt;]</span>
+<span class="go">                  [--sync-key &lt;sync-key&gt;] [--meta &lt;name:value&gt;]</span>
+<span class="go">                  [--header &lt;header&gt;]</span>
+<span class="go">                  [&lt;container&gt; [&lt;object&gt;]]</span>
+</pre></div>
+</div>
+<p>Updates meta information for the account, container, or object depending
+on the arguments given. If the container is not found, the <code class="docutils literal notranslate"><span class="pre">swiftclient</span></code>
+will create it automatically, but this is not true for accounts and
+objects. Containers also allow the <code class="docutils literal notranslate"><span class="pre">-r</span> <span class="pre">&lt;read-acl&gt;</span></code> (or <code class="docutils literal notranslate"><span class="pre">--read-acl</span>
+<span class="pre">&lt;read-acl&gt;</span></code>) and <code class="docutils literal notranslate"><span class="pre">-w</span> <span class="pre">&lt;write-acl&gt;</span></code> (or <code class="docutils literal notranslate"><span class="pre">--write-acl</span> <span class="pre">&lt;write-acl&gt;</span></code>) options.
+The <code class="docutils literal notranslate"><span class="pre">-m</span></code> or <code class="docutils literal notranslate"><span class="pre">--meta</span></code> option is allowed on accounts, containers and objects,
+and is used to define the user metadata items to set in the form <code class="docutils literal notranslate"><span class="pre">Name:Value</span></code>.
+You can repeat this option. For example: <code class="docutils literal notranslate"><span class="pre">post</span> <span class="pre">-m</span> <span class="pre">Color:Blue</span> <span class="pre">-m</span> <span class="pre">Size:Large</span></code></p>
+<p>For more information about ACL formats see the documentation:
+<a class="reference external" href="https://docs.openstack.org/swift/latest/misc.html#acls">ACLs</a>.</p>
+<p><strong>Positional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">[container]</span></code></dt><dd><p>Name of container to post to.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[object]</span></code></dt><dd><p>Name of object to post.</p>
+</dd>
+</dl>
+<p><strong>Optional arguments:</strong></p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--read-acl</span> <span class="pre">&lt;acl&gt;</span></code></dt><dd><p>Read ACL for containers. Quick summary of ACL syntax:
+<code class="docutils literal notranslate"><span class="pre">.r:*</span></code>, <code class="docutils literal notranslate"><span class="pre">.r:-.example.com</span></code>, <code class="docutils literal notranslate"><span class="pre">.r:www.example.com</span></code>,
+<code class="docutils literal notranslate"><span class="pre">account1</span></code> (v1.0 identity API only),
+<code class="docutils literal notranslate"><span class="pre">account1:*</span></code>, <code class="docutils literal notranslate"><span class="pre">account2:user2</span></code> (v2.0+ identity API).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-w,</span> <span class="pre">--write-acl</span> <span class="pre">&lt;acl&gt;</span></code></dt><dd><p>Write ACL for containers. Quick summary of ACL syntax:
+<code class="docutils literal notranslate"><span class="pre">account1</span></code> (v1.0 identity API only),
+<code class="docutils literal notranslate"><span class="pre">account1:*</span></code>, <code class="docutils literal notranslate"><span class="pre">account2:user2</span></code> (v2.0+ identity API).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-t,</span> <span class="pre">--sync-to</span> <span class="pre">&lt;sync-to&gt;</span></code></dt><dd><p>Sync To for containers, for multi-cluster replication.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-k,</span> <span class="pre">--sync-key</span> <span class="pre">&lt;sync-key&gt;</span></code></dt><dd><p>Sync Key for containers, for multi-cluster replication.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-m,</span> <span class="pre">--meta</span> <span class="pre">&lt;name:value&gt;</span></code></dt><dd><p>Sets a meta data item. This option may be repeated.</p>
+<p>Example: -m Color:Blue -m Size:Large</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-H,</span> <span class="pre">--header</span> <span class="pre">&lt;header:value&gt;</span></code></dt><dd><p>Adds a customized request header.
+This option may be repeated.</p>
+<p>Example: -H “content-type:text/plain” -H “Content-Length: 4000”</p>
+</dd>
+</dl>
+</section>
+<section id="swift-download">
+<span id="id5"></span><h3>swift download<a class="headerlink" href="#swift-download" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift download [--all] [--marker &lt;marker&gt;] [--prefix &lt;prefix&gt;]</span>
+<span class="go">                      [--output &lt;out_file&gt;] [--output-dir &lt;out_directory&gt;]</span>
+<span class="go">                      [--object-threads &lt;threads&gt;] [--ignore-checksum]</span>
+<span class="go">                      [--container-threads &lt;threads&gt;] [--no-download]</span>
+<span class="go">                      [--skip-identical] [--remove-prefix]</span>
+<span class="go">                      [--header &lt;header:value&gt;] [--no-shuffle]</span>
+<span class="go">                      [&lt;container&gt; [&lt;object&gt;] [...]]</span>
+</pre></div>
+</div>
+<p>Downloads everything in the account (with <code class="docutils literal notranslate"><span class="pre">--all</span></code>), or everything in a
+container, or a list of objects depending on the arguments given. For a
+single object download, you may use the <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">&lt;filename&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">&lt;filename&gt;</span></code>
+option to redirect the output to a specific file or <code class="docutils literal notranslate"><span class="pre">-</span></code> to
+redirect to stdout. The <code class="docutils literal notranslate"><span class="pre">--ignore-checksum</span></code> is an option that turn off
+checksum validation. You can specify optional headers with the repeatable
+cURL-like option <code class="docutils literal notranslate"><span class="pre">-H</span> <span class="pre">[--header</span> <span class="pre">&lt;name:value&gt;]</span></code>. <code class="docutils literal notranslate"><span class="pre">--ignore-mtime</span></code> ignores the
+<code class="docutils literal notranslate"><span class="pre">x-object-meta-mtime</span></code> metadata entry on the object (if present) and instead
+creates the downloaded files with fresh atime and mtime values.</p>
+<p><strong>Positional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;container&gt;</span></code></dt><dd><p>Name of container to download from. To download a
+whole account, omit this and specify –all.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;object&gt;</span></code></dt><dd><p>Name of object to download. Specify multiple times
+for multiple objects. Omit this to download all
+objects from the container.</p>
+</dd>
+</dl>
+<p><strong>Optional arguments:</strong></p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">-a,</span> <span class="pre">--all</span></code></dt><dd><p>Indicates that you really want to download
+everything in the account.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-m,</span> <span class="pre">--marker</span> <span class="pre">&lt;marker&gt;</span></code></dt><dd><p>Marker to use when starting a container or account
+download.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-p,</span> <span class="pre">--prefix</span> <span class="pre">&lt;prefix&gt;</span></code></dt><dd><p>Only download items beginning with &lt;prefix&gt;</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-r,</span> <span class="pre">--remove-prefix</span></code></dt><dd><p>An optional flag for –prefix &lt;prefix&gt;, use this
+option to download items without &lt;prefix&gt;</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-o,</span> <span class="pre">--output</span> <span class="pre">&lt;out_file&gt;</span></code></dt><dd><p>For a single file download, stream the output to
+&lt;out_file&gt;. Specifying “-” as &lt;out_file&gt; will
+redirect to stdout.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-D,</span> <span class="pre">--output-dir</span> <span class="pre">&lt;out_directory&gt;</span></code></dt><dd><p>An optional directory to which to store objects.
+By default, all objects are recreated in the current
+directory.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--object-threads</span> <span class="pre">&lt;threads&gt;</span></code></dt><dd><p>Number of threads to use for downloading objects.
+Default is 10.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--container-threads</span> <span class="pre">&lt;threads&gt;</span></code></dt><dd><p>Number of threads to use for downloading containers.
+Default is 10.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--no-download</span></code></dt><dd><p>Perform download(s), but don’t actually write anything
+to disk.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-H,</span> <span class="pre">--header</span> <span class="pre">&lt;header:value&gt;</span></code></dt><dd><p>Adds a customized request header to the query, like
+“Range” or “If-Match”. This option may be repeated.</p>
+<p>Example: –header “content-type:text/plain”</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--skip-identical</span></code></dt><dd><p>Skip downloading files that are identical on both
+sides.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--ignore-checksum</span></code></dt><dd><p>Turn off checksum validation for downloads.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--no-shuffle</span></code></dt><dd><p>By default, when downloading a complete account or
+container, download order is randomised in order to
+reduce the load on individual drives when multiple
+clients are executed simultaneously to download the
+same set of objects (e.g. a nightly automated download
+script to multiple servers). Enable this option to
+submit download jobs to the thread pool in the order
+they are listed in the object store.</p>
+</dd>
+</dl>
+</section>
+<section id="swift-delete">
+<span id="id6"></span><h3>swift delete<a class="headerlink" href="#swift-delete" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift delete [--all] [--leave-segments]</span>
+<span class="go">                    [--object-threads &lt;threads&gt;]</span>
+<span class="go">                    [--container-threads &lt;threads&gt;]</span>
+<span class="go">                    [--header &lt;header:value&gt;]</span>
+<span class="go">                    [&lt;container&gt; [&lt;object&gt;] [...]]</span>
+</pre></div>
+</div>
+<p>Deletes everything in the account (with <code class="docutils literal notranslate"><span class="pre">--all</span></code>), or everything in a
+container, or a list of objects depending on the arguments given. Segments
+of manifest objects will be deleted as well, unless you specify the
+<code class="docutils literal notranslate"><span class="pre">--leave-segments</span></code> option.</p>
+<p><strong>Positional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">[&lt;container&gt;]</span></code></dt><dd><p>Name of container to delete from.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[&lt;object&gt;]</span></code></dt><dd><p>Name of object to delete. Specify multiple times
+for multiple objects.</p>
+</dd>
+</dl>
+<p><strong>Optional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">-a,</span> <span class="pre">--all</span></code></dt><dd><p>Delete all containers and objects.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--leave-segments</span></code></dt><dd><p>Do not delete segments of manifest objects.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-H,</span> <span class="pre">--header</span> <span class="pre">&lt;header:value&gt;</span></code></dt><dd><p>Adds a custom request header to use for deleting
+objects or an entire container.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--object-threads</span> <span class="pre">&lt;threads&gt;</span></code></dt><dd><p>Number of threads to use for deleting objects.
+Default is 10.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--container-threads</span> <span class="pre">&lt;threads&gt;</span></code></dt><dd><p>Number of threads to use for deleting containers.
+Default is 10.</p>
+</dd>
+</dl>
+</section>
+<section id="swift-copy">
+<span id="id7"></span><h3>swift copy<a class="headerlink" href="#swift-copy" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift copy [--destination &lt;/container/object&gt;] [--fresh-metadata]</span>
+<span class="go">                  [--meta &lt;name:value&gt;] [--header &lt;header&gt;] &lt;container&gt;</span>
+<span class="go">                  &lt;object&gt; [&lt;object&gt;] [...]</span>
+</pre></div>
+</div>
+<p>Copies an object to a new destination or adds user metadata to an object. Depending
+on the options supplied, you can preserve existing metadata in contrast to the post
+command. The <code class="docutils literal notranslate"><span class="pre">--destination</span></code> option sets the copy target destination in the form
+<code class="docutils literal notranslate"><span class="pre">/container/object</span></code>. If not set, the object will be copied onto itself which is useful
+for adding metadata. You can use the <code class="docutils literal notranslate"><span class="pre">-M</span></code> or <code class="docutils literal notranslate"><span class="pre">--fresh-metadata</span></code> option to copy
+an object without existing user meta data, and the <code class="docutils literal notranslate"><span class="pre">-m</span></code> or <code class="docutils literal notranslate"><span class="pre">--meta</span></code> option
+to define user meta data items to set in the form <code class="docutils literal notranslate"><span class="pre">Name:Value</span></code>. You can repeat
+this option. For example: <code class="docutils literal notranslate"><span class="pre">copy</span> <span class="pre">-m</span> <span class="pre">Color:Blue</span> <span class="pre">-m</span> <span class="pre">Size:Large</span></code>.</p>
+<p><strong>Positional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;container&gt;</span></code></dt><dd><p>Name of container to copy from.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;object&gt;</span></code></dt><dd><p>Name of object to copy. Specify multiple times for multiple objects</p>
+</dd>
+</dl>
+<p><strong>Optional arguments:</strong></p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">-d,</span> <span class="pre">--destination</span> <span class="pre">&lt;/container[/object]&gt;</span></code></dt><dd><p>The container and name of the destination object. Name
+of destination object can be omitted, then will be
+same as name of source object. Supplying multiple
+objects and destination with object name is invalid.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-M,</span> <span class="pre">--fresh-metadata</span></code></dt><dd><p>Copy the object without any existing metadata,
+If not set, metadata will be preserved or appended</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-m,</span> <span class="pre">--meta</span> <span class="pre">&lt;name:value&gt;</span></code></dt><dd><p>Sets a meta data item. This option may be repeated.</p>
+<p>Example: -m Color:Blue -m Size:Large</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">-H,</span> <span class="pre">--header</span> <span class="pre">&lt;header:value&gt;</span></code></dt><dd><p>Adds a customized request header. This option may be repeated.</p>
+<p>Example: -H “content-type:text/plain” -H “Content-Length: 4000”</p>
+</dd>
+</dl>
+</section>
+<section id="swift-capabilities">
+<span id="id8"></span><h3>swift capabilities<a class="headerlink" href="#swift-capabilities" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift capabilities [--json] [&lt;proxy_url&gt;]</span>
+</pre></div>
+</div>
+<p>Displays cluster capabilities. The output includes the list of the
+activated Swift middlewares as well as relevant options for each ones.
+Additionally the command displays relevant options for the Swift core. If
+the <code class="docutils literal notranslate"><span class="pre">proxy-url</span></code> option is not provided, the storage URL retrieved after
+authentication is used as <code class="docutils literal notranslate"><span class="pre">proxy-url</span></code>.</p>
+<p><strong>Optional positional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;proxy_url&gt;</span></code></dt><dd><p>Proxy URL of the cluster to retrieve capabilities.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--json</span></code></dt><dd><p>Print the cluster capabilities in JSON format.</p>
+</dd>
+</dl>
+</section>
+<section id="swift-tempurl">
+<span id="id9"></span><h3>swift tempurl<a class="headerlink" href="#swift-tempurl" title="Link to this heading">¶</a></h3>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Usage: swift tempurl [--absolute] [--prefix-based]</span>
+<span class="go">                     &lt;method&gt; &lt;seconds&gt; &lt;path&gt; &lt;key&gt;</span>
+</pre></div>
+</div>
+<p>Generates a temporary URL for a Swift object. <code class="docutils literal notranslate"><span class="pre">method</span></code> option sets an HTTP method to
+allow for this temporary URL that is usually <code class="docutils literal notranslate"><span class="pre">GET</span></code> or <code class="docutils literal notranslate"><span class="pre">PUT</span></code>. <code class="docutils literal notranslate"><span class="pre">time</span></code> option sets
+the amount of time the temporary URL will be valid for.
+<code class="docutils literal notranslate"><span class="pre">time</span></code> can be specified as an integer, denoting the number of seconds
+from now on until the URL shall be valid; or, if <code class="docutils literal notranslate"><span class="pre">--absolute</span></code>
+is passed, the Unix timestamp when the temporary URL will expire.
+But beyond that, <code class="docutils literal notranslate"><span class="pre">time</span></code> can also be specified as an ISO 8601 timestamp
+in one of following formats:</p>
+<ol class="lowerroman simple">
+<li><p>Complete date: YYYY-MM-DD (e.g. 1997-07-16)</p></li>
+<li><p>Complete date plus hours, minutes and seconds:
+YYYY-MM-DDThh:mm:ss
+(e.g. 1997-07-16T19:20:30)</p></li>
+<li><p>Complete date plus hours, minutes and seconds with UTC designator:
+YYYY-MM-DDThh:mm:ssZ
+(e.g. 1997-07-16T19:20:30Z)</p></li>
+</ol>
+<p>Please be aware that if you don’t provide the UTC designator (i.e., Z)
+the timestamp is generated using your local timezone. If only a date is
+specified, the time part used will equal to <code class="docutils literal notranslate"><span class="pre">00:00:00</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">path</span></code> option sets the full path to the Swift object.
+Example: <code class="docutils literal notranslate"><span class="pre">/v1/AUTH_account/c/o</span></code>. <code class="docutils literal notranslate"><span class="pre">key</span></code> option is
+the secret temporary URL key set on the Swift cluster. To set a key, run
+<code class="docutils literal notranslate"><span class="pre">swift</span> <span class="pre">post</span> <span class="pre">-m</span> <span class="pre">&quot;Temp-URL-Key:</span> <span class="pre">&lt;your</span> <span class="pre">secret</span> <span class="pre">key&gt;&quot;</span></code>. To generate a prefix-based temporary
+URL use the <code class="docutils literal notranslate"><span class="pre">--prefix-based</span></code> option. This URL will contain the path to the prefix. Do not
+forget to append the desired objectname at the end of the path portion (and before the
+query portion) before sharing the URL. It is possible to use ISO 8601 UTC timestamps within the
+URL by using the <code class="docutils literal notranslate"><span class="pre">--iso8601</span></code> option.</p>
+<p><strong>Positional arguments:</strong></p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;method&gt;</span></code></dt><dd><p>An HTTP method to allow for this temporary URL.
+Usually ‘GET’ or ‘PUT’.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;seconds&gt;</span></code></dt><dd><p>The amount of time in seconds the temporary URL will be
+valid for; or, if –absolute is passed, the Unix
+timestamp when the temporary URL will expire.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;path&gt;</span></code></dt><dd><p>The full path to the Swift object.</p>
+<p>Example: /v1/AUTH_account/c/o
+or: <a class="reference external" href="http://saio:8080/v1/AUTH_account/c/o">http://saio:8080/v1/AUTH_account/c/o</a></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;key&gt;</span></code></dt><dd><p>The secret temporary URL key set on the Swift cluster.
+To set a key, run ‘swift post -m
+“Temp-URL-Key:b3968d0207b54ece87cccc06515a89d4”’</p>
+</dd>
+</dl>
+<p><strong>Optional arguments:</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">--absolute</span></code></dt><dd><p>Interpret the &lt;seconds&gt; positional argument as a Unix
+timestamp rather than a number of seconds in the
+future.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--prefix-based</span></code></dt><dd><p>If present, a prefix-based tempURL will be generated.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<p>In this section we present some example usage of the <code class="docutils literal notranslate"><span class="pre">swift</span></code> CLI. To keep the
+examples as short as possible, these examples assume that the relevant authentication
+options have been set using environment variables. You can obtain the full list of
+commands and options available in the <code class="docutils literal notranslate"><span class="pre">swift</span></code> CLI by executing the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>--help
+&gt;<span class="w"> </span>swift<span class="w"> </span>&lt;command&gt;<span class="w"> </span>--help
+</pre></div>
+</div>
+<section id="simple-examples">
+<h3>Simple examples<a class="headerlink" href="#simple-examples" title="Link to this heading">¶</a></h3>
+<p>List the existing swift containers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>list
+
+container_1
+</pre></div>
+</div>
+<p>Create a new container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>post<span class="w"> </span>TestContainer
+</pre></div>
+</div>
+<p>Upload an object into a container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>upload<span class="w"> </span>TestContainer<span class="w"> </span>testSwift.txt
+
+testSwift.txt
+</pre></div>
+</div>
+<p>List the contents of a container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>list<span class="w"> </span>TestContainer
+
+testSwift.txt
+</pre></div>
+</div>
+<p>Copy an object to new destination:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>copy<span class="w"> </span>-d<span class="w"> </span>/DestContainer/testSwift.txt<span class="w"> </span>SourceContainer<span class="w"> </span>testSwift.txt
+
+SourceContainer/testSwift.txt<span class="w"> </span>copied<span class="w"> </span>to<span class="w"> </span>/DestContainer/testSwift.txt
+</pre></div>
+</div>
+<p>Delete an object from a container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>delete<span class="w"> </span>TestContainer<span class="w"> </span>testSwift.txt
+
+testSwift.txt
+</pre></div>
+</div>
+<p>Delete a container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>delete<span class="w"> </span>TestContainer
+
+TestContainer
+</pre></div>
+</div>
+<p>Display auth related authentication variables in shell friendly format:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>auth
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_STORAGE_URL</span><span class="o">=</span>http://127.0.0.1:8080/v1/AUTH_bf5e63572f7a420a83fcf0aa8c72c2c7
+<span class="nb">export</span><span class="w"> </span><span class="nv">OS_AUTH_TOKEN</span><span class="o">=</span>c597015ae19943a18438b52ef3762e79
+</pre></div>
+</div>
+<p>Download an object from a container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>download<span class="w"> </span>TestContainer<span class="w"> </span>testSwift.txt
+
+testSwift.txt<span class="w"> </span><span class="o">[</span>auth<span class="w"> </span><span class="m">0</span>.028s,<span class="w"> </span>headers<span class="w"> </span><span class="m">0</span>.045s,<span class="w"> </span>total<span class="w"> </span><span class="m">0</span>.045s,<span class="w"> </span><span class="m">0</span>.002<span class="w"> </span>MB/s<span class="o">]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To upload an object to a container, your current working directory must be
+where the file is located or you must provide the complete path to the file.
+In other words, the –object-name &lt;object-name&gt; is an option that will upload
+file and name object to &lt;object-name&gt; or upload directory and use &lt;object-name&gt; as
+object prefix. In the case that you provide the complete path of the file,
+that complete path will be the name of the uploaded object.</p>
+</div>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>upload<span class="w"> </span>TestContainer<span class="w"> </span>/home/swift/testSwift/testSwift.txt
+
+home/swift/testSwift/testSwift.txt
+
+&gt;<span class="w"> </span>swift<span class="w"> </span>list<span class="w"> </span>TestContainer
+
+home/swift/testSwift/testSwift.txt
+</pre></div>
+</div>
+</section>
+<section id="more-complex-examples">
+<h3>More complex examples<a class="headerlink" href="#more-complex-examples" title="Link to this heading">¶</a></h3>
+<p>Swift has a single object size limit of 5GiB. In order to upload files larger
+than this, we must create a large object that consists of smaller segments.
+The example below shows how to upload a large video file as a static large
+object in 1GiB segments:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>upload<span class="w"> </span>videos<span class="w"> </span>--use-slo<span class="w"> </span>--segment-size<span class="w"> </span>1G<span class="w"> </span>myvideo.mp4
+
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">8</span>
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">4</span>
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">2</span>
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">7</span>
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">0</span>
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">1</span>
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">3</span>
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">6</span>
+myvideo.mp4<span class="w"> </span>segment<span class="w"> </span><span class="m">5</span>
+myvideo.mp4
+</pre></div>
+</div>
+<p>This command will upload segments to a container named <code class="docutils literal notranslate"><span class="pre">videos_segments</span></code>, and
+create a manifest file describing the entire object in the <code class="docutils literal notranslate"><span class="pre">videos</span></code> container.
+For more information on large objects, see the documentation <a class="reference external" href="https://docs.openstack.org/swift/latest/overview_large_objects.html">here</a>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>list<span class="w"> </span>videos
+
+myvideo.mp4
+
+&gt;<span class="w"> </span>swift<span class="w"> </span>list<span class="w"> </span>videos_segments
+
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000000
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000001
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000002
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000003
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000004
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000005
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000006
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000007
+myvideo.mp4/slo/1460229233.679546/9341553868/1073741824/00000008
+</pre></div>
+</div>
+<p>Firstly, the key should be set, then generate a temporary URL for a Swift object:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&gt;<span class="w"> </span>swift<span class="w"> </span>post<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Temp-URL-Key:b3968d0207b54ece87cccc06515a89d4&quot;</span>
+
+&gt;<span class="w"> </span>swift<span class="w"> </span>tempurl<span class="w"> </span>GET<span class="w"> </span><span class="m">6000</span><span class="w"> </span>/v1/AUTH_bf5e63572f7a420a83fcf0aa8c72c2c7<span class="se">\</span>
+<span class="w">  </span>/firstcontainer/clean.sh<span class="w"> </span>b3968d0207b54ece87cccc06515a89d4
+
+/v1/AUTH_/firstcontainer/clean.sh?temp_url_sig<span class="o">=</span><span class="se">\</span>
+9218fc288cc09e5edd857b6a3d43cf2122b906dc<span class="p">&amp;</span><span class="nv">temp_url_expires</span><span class="o">=</span><span class="m">1472203614</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="docs-actions">
+          
+            <a href="../contributor/contributing.html"><i class="fa fa-angle-double-left" data-toggle="tooltip" data-placement="top" title="Previous: So You Want to Contribute…"></i></a>
+          
+          
+            <a href="../service-api.html"><i class="fa fa-angle-double-right" data-toggle="tooltip" data-placement="top" title="Next: The swiftclient.SwiftService API"></i></a>
+          
+          <a id="pdfLink2" href="" target="_blank" title="Download the manuals as PDF"><i class="fa fa-file-pdf-o" data-toggle="tooltip" data-placement="top" title="Download PDF"></i></a>
+          
+            <a id="logABugLink3" href="" target="_blank" title="Found an error? Report a bug against this page"><i class="fa fa-bug" data-toggle="tooltip" data-placement="top" title="Report a Bug"></i></a>
+          
+          </div>
+          <div class="row docs-byline bottom">
+            <div class="docs-updated">this page last updated: 2019-07-09 22:57:56</div>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 docs-license">
+<a href="https://creativecommons.org/licenses/by/3.0/">
+ <img src="../_static/images/docs/license.png" alt="Creative Commons Attribution 3.0 License"/>
+</a>
+<p>
+ Except where otherwise noted, this document is licensed under
+ <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons
+ Attribution 3.0 License</a>. See all <a href="https://www.openstack.org/legal">
+ OpenStack Legal Documents</a>.
+</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 docs-actions-wrapper">
+            <!-- ID buglinkbottom added so that pre-filled doc bugs
+                 are sent to Launchpad projects related to the
+                 document -->
+              <a href="#" id="logABugLink2" class="docs-footer-actions"><i class="fa fa-bug"></i> found an error? report a bug</a>
+            </div>
+          </div>
+        </div>
+<div class="col-lg-3 col-md-4 col-sm-4 col-lg-pull-9 col-md-pull-8 col-sm-pull-8 order-1 docs-sidebar">
+  <div class="btn-group docs-sidebar-releases">
+    <button onclick="location.href='/'" class="btn docs-sidebar-home" data-toggle="tooltip" data-placement="top" title="OpenStack Docs Home"><i class="fa fa-arrow-circle-o-left"></i></button>
+<button type="button" data-bs-toggle="dropdown" class="btn dropdown-toggle docs-sidebar-release-select">OpenStack Documentation</button>
+<ul class="dropdown-menu docs-sidebar-dropdown" role="menu">
+  <li class="dropdown-header">Guides</li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/index.html#install-guides">Install Guides</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/index.html#user-guides">User Guides</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/index.html#configuration-guides">Configuration Guides</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/index.html#ops-and-admin-guides">Operations and Administration Guides</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/index.html#api-guides">API Guides</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/index.html#contributor-guides">Contributor Guides</a></li>
+  <li class="dropdown-header">Languages</li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/de/">Deutsch (German)</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/fr/">Français (French)</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/id/">Bahasa Indonesia (Indonesian)</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/it/">Italiano (Italian)</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/ja/">日本語 (Japanese)</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/ko_KR/">한국어 (Korean)</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/pt_BR/">Português (Portuguese)</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/tr_TR/">Türkçe (Türkiye)</a></li>
+  <li><a class="dropdown-item" href="https://docs.openstack.org/zh_CN/">简体中文 (Simplified Chinese)</a></li>
+</ul>
+  </div>
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="table-of-contents">
+      <a href="../index.html" class="docs-sidebar-section-title"><h4>python-swiftclient 0.1.0.dev1151</h4></a>
+      <ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contributor/contributing.html">So You Want to Contribute…</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CLI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#swift-usage">swift usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#swift-optional-arguments">swift optional arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cli-commands">CLI commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../service-api.html">The swiftclient.SwiftService API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client-api.html">The swiftclient.Connection API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../swiftclient.html">swiftclient</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../swiftclient.html#module-swiftclient.authv1">swiftclient.authv1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../swiftclient.html#module-swiftclient.client">swiftclient.client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../swiftclient.html#module-swiftclient.service">swiftclient.service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../swiftclient.html#module-swiftclient.exceptions">swiftclient.exceptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../swiftclient.html#module-swiftclient.multithreading">swiftclient.multithreading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../swiftclient.html#module-swiftclient.utils">swiftclient.utils</a></li>
+</ul>
+
+    </div>
+
+  <div class="docs-sidebar-toc">
+    <div class="docs-sidebar-section" id="local-table-of-contents">
+      <h4 class="docs-sidebar-section-title">Page Contents</h4>
+      <ul>
+<li><a class="reference internal" href="#">CLI</a><ul>
+<li><a class="reference internal" href="#swift-usage">swift usage</a></li>
+<li><a class="reference internal" href="#swift-optional-arguments">swift optional arguments</a></li>
+<li><a class="reference internal" href="#authentication">Authentication</a><ul>
+<li><a class="reference internal" href="#keystone-v3">Keystone v3</a></li>
+<li><a class="reference internal" href="#keystone-v2">Keystone v2</a></li>
+<li><a class="reference internal" href="#legacy-auth-systems">Legacy auth systems</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cli-commands">CLI commands</a><ul>
+<li><a class="reference internal" href="#auth">Auth</a></li>
+<li><a class="reference internal" href="#swift-stat">swift stat</a></li>
+<li><a class="reference internal" href="#swift-list">swift list</a></li>
+<li><a class="reference internal" href="#swift-upload">swift upload</a></li>
+<li><a class="reference internal" href="#swift-post">swift post</a></li>
+<li><a class="reference internal" href="#swift-download">swift download</a></li>
+<li><a class="reference internal" href="#swift-delete">swift delete</a></li>
+<li><a class="reference internal" href="#swift-copy">swift copy</a></li>
+<li><a class="reference internal" href="#swift-capabilities">swift capabilities</a></li>
+<li><a class="reference internal" href="#swift-tempurl">swift tempurl</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#simple-examples">Simple examples</a></li>
+<li><a class="reference internal" href="#more-complex-examples">More complex examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  </div>
+</div>
+      </div>
+    </div>
+<footer>
+  <div class="container">
+    <div class="row footer-links">
+      <div class="col-lg-2 col-sm-2">
+        <h3>OpenStack</h3>
+        <ul>
+          <li><a href="https://www.openstack.org/software/project-navigator/">Projects</a></li>
+          <li><a href="https://security.openstack.org/">OpenStack Security</a></li>
+          <li><a href="https://openstack.org/blog/">Blog</a></li>
+          <li><a href="https://openstack.org/news/">News</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="https://www.meetup.com/pro/openinfradev/">User Groups</a></li>
+          <li><a href="https://openstack.org/community/events/">Events</a></li>
+          <li><a href="https://openstack.org/community/jobs/">Jobs</a></li>
+          <li><a href="https://openinfra.dev/members/">Companies</a></li>
+          <li><a href="https://docs.openstack.org/contributors">Contribute</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Documentation</h3>
+        <ul>
+          <li><a href="https://docs.openstack.org">OpenStack Manuals</a></li>
+          <li><a href="https://openstack.org/software/start/">Getting Started</a></li>
+          <li><a href="https://developer.openstack.org">API Documentation</a></li>
+          <li><a href="https://wiki.openstack.org">Wiki</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-2">
+        <h3>Branding &amp; Legal</h3>
+        <ul>
+          <li><a href="https://openinfra.dev/legal">Legal Docs</a></li>
+          <li><a href="https://openstack.org/brand/">Logos &amp; Guidelines</a></li>
+          <li><a href="https://openinfra.dev/legal/trademark-policy">Trademark Policy</a></li>
+          <li><a href="https://openinfra.dev/privacy-policy">Privacy Policy</a></li>
+          <li><a href="https://docs.openstack.org/contributors/common/setup-gerrit.html#individual-contributor-license-agreement">OpenInfra CLA</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <h3>Stay In Touch</h3>
+        <a href="https://twitter.com/OpenStack" target="_blank" class="social-icons footer-twitter"></a>
+        <a href="https://www.facebook.com/openinfradev" target="_blank" class="social-icons footer-facebook"></a>
+        <a href="https://www.linkedin.com/company/open-infrastructure-foundation" target="_blank" class="social-icons footer-linkedin"></a>
+        <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank" class="social-icons footer-youtube"></a>
+        <p class="fine-print">
+          The OpenStack project is provided under the
+          <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 license</a>. Docs.openstack.org is powered by
+          <a href="https://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- jQuery -->
+<script src="../_static/js/jquery-3.2.1.min.js"></script>
+
+<!-- Bootstrap JavaScript -->
+<script src="../_static/js/bootstrap.bundle.min.js"></script>
+
+<!-- The rest of the JS -->
+<script src="../_static/js/navigation.js"></script>
+
+<!-- Docs JS -->
+<script src="../_static/js/docs.js"></script>
+
+<!-- Javascript for page -->
+<script>
+  /* Build a description of this page including SHA, source location on git
+   * repo, build time and the project's launchpad bug tag. Set the HREF of the
+   * bug buttons
+   */
+    var lineFeed = "%0A";
+    var gitURL = "Source: Can't derive source file URL";
+
+    /* there have been cases where "pagename" wasn't set; better check for it */
+    /* "giturl" is the URL of the source file on Git and is auto-generated by
+     * openstackdocstheme.
+     *
+     * "pagename" is a standard sphinx parameter containing the name of
+     * the source file, without extension.
+     */
+
+    var sourceFile = "cli/index" + ".rst";
+    gitURL = "Source: https://opendev.org/openstack/python-swiftclient/src/doc/source" + "/" + sourceFile;
+
+    /* gitsha, project and bug_tag rely on variables in conf.py */
+    var gitSha = "SHA: 139b6d714a392e943ed1dcdc4a607dedde3b185d";
+    var repositoryName = "openstack/python-swiftclient";
+    var bugProject = "python-swiftclient";
+    var bugTitle = "CLI in python-swiftclient";
+    var fieldTags = "";
+    var useStoryboard = "";
+
+    /* "last_updated" is the build date and time. It relies on the
+       conf.py variable "html_last_updated_fmt", which should include
+       year/month/day as well as hours and minutes                   */
+    var buildstring = "Release: 0.1.0.dev1151 on 2019-07-09 22:57:56";
+
+    var fieldComment = encodeURI(buildstring) +
+                       lineFeed + encodeURI(gitSha) +
+                       lineFeed + encodeURI(gitURL) ;
+
+    logABug(bugTitle, bugProject, fieldComment, fieldTags, repositoryName, useStoryboard);
+    var currentSourceFile = "cli/index";
+    var pdfFileName = "doc-python-swiftclient.pdf";
+    pdfLink(currentSourceFile, pdfFileName);
+</script>
+
+
+  </body>
+</html>
